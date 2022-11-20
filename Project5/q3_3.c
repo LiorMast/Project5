@@ -35,7 +35,8 @@ void q3_3() {
 				default:
 					break;
 				}
-				printf("Discount: %f", discount);
+				printf("Final price after discount: %.2f\n", (pprice - (pprice * discount)) * q);
+				
 			}
 			else {
 				printf("Final price without discount: %d", pprice*q);
