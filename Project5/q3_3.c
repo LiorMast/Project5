@@ -7,13 +7,14 @@ void q3_3() {
 
 		printf("Please enter product type: ");
 		scanf("%d", &ptype);
-		printf("Please enter product price: ");
-		scanf("%d", &pprice);
-		printf("Please enter quantity: ");
-		scanf("%d", &q);
 
 		if (ptype >= 1 && ptype <= 8)
 		{
+			printf("Please enter product price: ");
+			scanf("%d", &pprice);
+			printf("Please enter quantity: ");
+			scanf("%d", &q);
+
 			if (q > 35)
 			{
 				switch (ptype)
