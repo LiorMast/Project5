@@ -3,15 +3,17 @@
 
 void q4_3b() {
 
-	int input = 0, star;
+	int input = 0, oprow = 1; //init vars - input for user input 
 	printf("Please enter a number:");
 	scanf("%d", &input);
-
-	for (int row = 0; row < input; row++)
+	input *= 2;
+	input++;
+	int opcol = input;
+	for (int row = 1; row < input+1; row++)
 	{
-		for (int col = 0; col < input; col++)
+		for (int col = 1; col < input+1; col++)
 		{
-			if (col==row)
+			if (col==row || (row==oprow && col==opcol))
 			{
 				printf("*");
 			}
@@ -22,5 +24,7 @@ void q4_3b() {
 			
 		}
 		printf("\n");
+		oprow++;
+		opcol--;
 	}
 }
