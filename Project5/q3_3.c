@@ -1,4 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
+#define SMALL 0.05
+#define MEDIUM 0.1
+#define LARGE 0.2
 #include<stdio.h>
 
 void q3_3() {
@@ -27,16 +30,16 @@ void q3_3() {
 				case 1:
 				case 4:
 				case 6:
-					discount = 0.05;
+					discount = SMALL;
 					break;
 				case 2:
 				case 5:
-					discount = 0.1;
+					discount = MEDIUM;
 					break;
 				case 3:
 				case 7:
 				case 8:
-					discount = 0.2;
+					discount = LARGE;
 					break;
 				default:
 					break;
