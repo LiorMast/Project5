@@ -18,11 +18,14 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.c" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{53877023-ca07-4e80-9cb6-a117c665e3a0}</ProjectGuid>
-    <RootNamespace>מטלה4</RootNamespace>
+    <ProjectGuid>{4b8ba77d-75ba-4e38-9435-e2b69b1d7a75}</ProjectGuid>
+    <RootNamespace>מטלה6אבלבעצמי</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -126,13 +129,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\Project5\main.c" />
-    <ClCompile Include="..\Project5\q4_4.c" />
-    <ClCompile Include="q4_1.c" />
-    <ClCompile Include="q4_2.c" />
-    <ClCompile Include="q4_5.c" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -11,6 +11,8 @@ void test() {
 	printf("a is %d\n", a);
 }
 
+
+
 void main() {
-	test();
+	q4_5();
 }
