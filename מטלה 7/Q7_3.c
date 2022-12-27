@@ -6,11 +6,18 @@
 #define CMN_SIZE 7
 #define R_SIZE 4
 #define L_SIZE 3
+#define MULCOL L_SIZE
+#define MULROW R_SIZE
 
-int rmat[R_SIZE][CMN_SIZE] = { 0 };
-int lmat[CMN_SIZE][L_SIZE] = { 0 };
+int lmat[R_SIZE][CMN_SIZE] = { 0 };
+int rmat[CMN_SIZE][L_SIZE] = { 0 };
 int mult[R_SIZE][L_SIZE] = { 0 };
 int col[CMN_SIZE] = { 0 };
+
+int ltest[R_SIZE][CMN_SIZE] = { 3, 1, 6, 8, 3, 2, 6,5, 5, 7, 2, 1, 4, 9,4, 7, 7, 1, 9, 6, 1,5, 6, 7, 8, 6, 1, 2 }; //4X7 MATRIX
+int rtest[CMN_SIZE][L_SIZE] = { 5, 1, 7,4, 9, 9,2, 7, 6,8, 9, 7,9, 8, 3,5, 5, 9,2, 2, 6 };						   //7X3 MATRIX
+
+int getRandomDigit();
 
 void getArray(int arr[], int size) {
 	for (int i = 0; i < size; i++) {
@@ -24,44 +31,44 @@ int getRandomDigit() {
 	return digit;
 }
 
-void getRightMatrix(int arr[R_SIZE][CMN_SIZE]) {
-	for (int i = 0; i < CMN_SIZE; i++) {
-		getArray(arr[i], R_SIZE);
+void getLeftMatrix(int arr[R_SIZE][CMN_SIZE]) {
+	for (int i = 0; i < R_SIZE; i++) {
+		getArray(arr[i], CMN_SIZE);
 	}
 }
 
-void getLeftMatrix(int arr[CMN_SIZE][L_SIZE]) {
-	for (int i = 0; i < L_SIZE; i++) {
-		getArray(arr[i], CMN_SIZE);
+void getRightMatrix(int arr[CMN_SIZE][L_SIZE]) {
+	for (int i = 0; i < CMN_SIZE; i++) {
+		getArray(arr[i], L_SIZE);
 	}
 }
 
 void printArray(int arr[], int size) {
 	for (int i = 0; i < size; i++) {
 		// Print the current item in the array
-		printf("%d\t", arr[i]);
+		printf("%3d ", arr[i]);
 	}
 }
 
-void printRightMatrix(int arr[R_SIZE][CMN_SIZE]) {
-	for (int i = 0; i < CMN_SIZE; i++) {
-		printf("row number %d:\t|", i + 1);
-		printArray(arr[i], R_SIZE);
-		puts("|\n");
-	}
-
-}
-
-void printLeftMatrix(int arr[CMN_SIZE][L_SIZE]) {
-	for (int i = 0; i < L_SIZE; i++) {
+void printLeftMatrix(int arr[R_SIZE][CMN_SIZE]) {
+	for (int i = 0; i < R_SIZE; i++) {
 		printf("row number %d:\t|", i + 1);
 		printArray(arr[i], CMN_SIZE);
-		puts("|\n");
+		printf("|\n");
 	}
 
 }
 
-void getCol(int col[], int arr[R_SIZE][CMN_SIZE], int colnum) {
+void printRightMatrix(int arr[CMN_SIZE][L_SIZE]) {
+	for (int i = 0; i < CMN_SIZE; i++) {
+		printf("row number %d:\t|", i + 1);
+		printArray(arr[i], L_SIZE);
+		printf("|\n");
+	}
+
+}
+
+void getCol(int col[], int arr[CMN_SIZE][L_SIZE], int colnum) {
 	for (int i = 0; i < CMN_SIZE; i++)
 	{
 		col[i] = arr[i][colnum];
@@ -69,9 +76,9 @@ void getCol(int col[], int arr[R_SIZE][CMN_SIZE], int colnum) {
 }
 
 void printMultMatrix(int arr[R_SIZE][L_SIZE]) {
-	for (int i = 0; i < L_SIZE; i++) {
+	for (int i = 0; i < R_SIZE; i++) {
 		printf("row number %d:\t|", i + 1);
-		printArray(arr[i], R_SIZE);
+		printArray(arr[i], L_SIZE);
 		printf("|\n");
 	}
 
@@ -86,14 +93,18 @@ int MultArray(int row[], int col[], int size) {
 	return sum;
 }
 
-void MultMatrices(int lmat[CMN_SIZE][L_SIZE],int rmat[R_SIZE][CMN_SIZE]) {
-	for (int i = 0; i < CMN_SIZE; i++)
+void MultMatrices(int lmat[R_SIZE][CMN_SIZE], int rmat[CMN_SIZE][L_SIZE]) {
+	int res = 0;
+	for (int i = 0; i < MULROW; i++)
 	{
-		printArray(lmat[i], CMN_SIZE);
-		puts("\n");
-		getCol(col, rmat, i);
-		printArray(col, CMN_SIZE);
-		puts("\n");
+		for (int j = 0; j < MULCOL; j++)
+		{
+			getCol(col, rmat, j);
+			res = MultArray(lmat[i], col, CMN_SIZE);
+			mult[i][j] = res;
+
+		}
+
 	}
 }
 
@@ -101,8 +112,12 @@ void main() {
 	srand((unsigned)time(NULL)); //init rand seed
 	getRightMatrix(rmat);
 	getLeftMatrix(lmat);
+	puts("lmat\n");
+	printLeftMatrix(lmat);
+	puts("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+	puts("rmat\n");
 	printRightMatrix(rmat);
 	puts("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-	printLeftMatrix(lmat);
 	MultMatrices(lmat, rmat);
+	printMultMatrix(mult);
 }
